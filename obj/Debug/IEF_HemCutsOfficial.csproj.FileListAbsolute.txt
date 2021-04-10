@@ -1,0 +1,7 @@
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_HemCutsOfficial\bin\IEF_HemCutsOfficial.dll
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_HemCutsOfficial\bin\IEF_HemCutsOfficial.pdb
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_HemCutsOfficial\obj\Debug\IEF_HemCutsOfficial.dll
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_HemCutsOfficial\obj\Debug\IEF_HemCutsOfficial.pdb
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_HemCutsOfficial\obj\Debug\IEF_HemCutsOfficial.csprojAssemblyReference.cache
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_HemCutsOfficial\obj\Debug\IEF_HemCutsOfficial.Properties.Resources.resources
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_HemCutsOfficial\obj\Debug\IEF_HemCutsOfficial.csproj.GenerateResource.cache
