@@ -1,0 +1,16 @@
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\bin\IEF_Toolbox.dll
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\bin\IEF_Toolbox.pdb
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.csprojAssemblyReference.cache
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.Properties.Resources.resources
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.csproj.GenerateResource.cache
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.dll
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.pdb
+C:\Users\MJChen\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.csproj.ResolveComReference.cache
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\bin\IEF_Toolbox.dll
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\bin\IEF_Toolbox.pdb
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.csprojAssemblyReference.cache
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.csproj.ResolveComReference.cache
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.Properties.Resources.resources
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.csproj.GenerateResource.cache
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.dll
+C:\Users\MJChen\OneDrive - Island International Industries\Desktop\Local Working\Hem Cut Generator\VS Code\IEF_Toolbox\obj\Debug\IEF_Toolbox.pdb

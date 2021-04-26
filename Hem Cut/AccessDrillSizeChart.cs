@@ -37,7 +37,7 @@ namespace IEF_Toolbox
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Button", "B", "Insert button and click to accsess the Tap & Clearance Drill Size Chart on LittleMachineShop.com", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Button", "B", "Insert button and click to accsess the Tap & Clearance Drill Size Chart on LittleMachineShop.com", GH_ParamAccess.item,false);
         }
 
         /// <summary>

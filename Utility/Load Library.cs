@@ -4,22 +4,23 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace IEF_Toolbox
+namespace IEF_Toolbox.Utility
 {
-    public class Boolean_Difference : GH_Component
+    public class Load_Library : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the Boolean_Difference class.
+        /// Initializes a new instance of the Load_Library class.
         /// </summary>
-        public Boolean_Difference()
-          : base("Boolean Difference", "BD",
-              "Slightly faster Boolean Difference operation than the built-in Solid Difference component",
+        public Load_Library()
+          : base("Load Library", "Load Library",
+              "Description",
               "IEF Toolbox", "01_Utility")
         {
         }
+
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.senary; }
+            get { return GH_Exposure.septenary; }
         }
 
         /// <summary>
@@ -27,11 +28,11 @@ namespace IEF_Toolbox
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBrepParameter("Base Geometry", "B", "List of base geometries", GH_ParamAccess.list);
-            pManager.AddBrepParameter("Remove Geometry", "R", "List of remove geometries", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Tolerance", "t", "Tolerance of the boolean operation. The default value is set" +
-                " to the RhinoDoc.ModelAbsoluteTolerance", GH_ParamAccess.item);
-            pManager[2].Optional = true;
+            pManager.AddTextParameter("Library Path", "L", "The path of the excel library", GH_ParamAccess.item);
+            pManager.AddTextParameter("Worksheet", "W", "Specify the worksheet", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Listen?", "l", "Actively loading the library", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("Read", "R", "Turn to true to read the excel sheet", GH_ParamAccess.item, false);
+            pManager[1].Optional = true;
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace IEF_Toolbox
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddBrepParameter("Result", "R", "The result geometry of the boolean difference operation", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Library Object", "L", "The library object. Use the Deconstruct Library component to extract information", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -48,20 +49,18 @@ namespace IEF_Toolbox
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<Brep> baseG = new List<Brep>();
-            List<Brep> removeG = new List<Brep>();
-            double tol = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance;
+            string path = null;
+            string worksheet = null;
+            bool listen = false;
+            bool read = false;
+
+            bool success1 = DA.GetData(0, ref path);
+            bool success2 = DA.GetData(0, ref worksheet);
+            bool success3 = DA.GetData(0, ref listen);
+            bool success4 = DA.GetData(0, ref read);
 
 
-            bool success1 = DA.GetDataList(0, baseG);
-            bool success2 = DA.GetDataList(1, removeG);
-            bool success3 = DA.GetData(2, ref tol);
 
-            if (!success1) { return; }
-
-            Brep[] result = Brep.CreateBooleanDifference(baseG, removeG, tol);
-
-            DA.SetDataList(0, result);
         }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace IEF_Toolbox
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("20195927-24cd-4523-9e7c-1c9a8cc69784"); }
+            get { return new Guid("6fdd53ff-7acc-4392-b395-a355ef4d4695"); }
         }
     }
 }

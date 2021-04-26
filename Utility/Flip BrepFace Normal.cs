@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace IEF_Toolbox
+namespace IEF_Toolbox.Utility
 {
-    public class Boolean_Difference : GH_Component
+    public class Flip_BrepFace_Normal : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the Boolean_Difference class.
+        /// Initializes a new instance of the Flip_BrepFace_Normal class.
         /// </summary>
-        public Boolean_Difference()
-          : base("Boolean Difference", "BD",
-              "Slightly faster Boolean Difference operation than the built-in Solid Difference component",
+        public Flip_BrepFace_Normal()
+          : base("Flip BrepFace_Normal", "Flip",
+              "Reverse the normal direction of all faces of the input brep",
               "IEF Toolbox", "01_Utility")
         {
         }
@@ -27,11 +27,7 @@ namespace IEF_Toolbox
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBrepParameter("Base Geometry", "B", "List of base geometries", GH_ParamAccess.list);
-            pManager.AddBrepParameter("Remove Geometry", "R", "List of remove geometries", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Tolerance", "t", "Tolerance of the boolean operation. The default value is set" +
-                " to the RhinoDoc.ModelAbsoluteTolerance", GH_ParamAccess.item);
-            pManager[2].Optional = true;
+            pManager.AddBrepParameter("brep_Brep to flip", "B", "The brep to flip", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -39,7 +35,7 @@ namespace IEF_Toolbox
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddBrepParameter("Result", "R", "The result geometry of the boolean difference operation", GH_ParamAccess.list);
+            pManager.AddBrepParameter("brep_Brep flipped", "B", "The brep flipped", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -48,20 +44,14 @@ namespace IEF_Toolbox
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<Brep> baseG = new List<Brep>();
-            List<Brep> removeG = new List<Brep>();
-            double tol = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance;
+            Brep brep = new Brep();
 
-
-            bool success1 = DA.GetDataList(0, baseG);
-            bool success2 = DA.GetDataList(1, removeG);
-            bool success3 = DA.GetData(2, ref tol);
-
+            bool success1 = DA.GetData(0, ref brep);
             if (!success1) { return; }
 
-            Brep[] result = Brep.CreateBooleanDifference(baseG, removeG, tol);
+            brep.Flip();
 
-            DA.SetDataList(0, result);
+            DA.SetData(0, brep);
         }
 
         /// <summary>
@@ -82,7 +72,7 @@ namespace IEF_Toolbox
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("20195927-24cd-4523-9e7c-1c9a8cc69784"); }
+            get { return new Guid("921f0611-449e-462d-90cc-975ca4e74ddf"); }
         }
     }
 }

@@ -20,13 +20,13 @@ namespace IEF_Toolbox.Class
 
 
 
-            SetProfileType();
+            ResetProfileType();
         }
 
         /// <summary>
         /// Methods
         /// </summary>
-        public override void SetProfileType() {
+        public override void ResetProfileType() {
             ProfileType = "Chicken Head";
         }
     }

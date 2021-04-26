@@ -34,7 +34,7 @@ namespace IEF_Toolbox.Profile
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Profile ID","P","The Profile ID",GH_ParamAccess.item);
+            pManager.AddTextParameter("Profile ID","ID","The Profile ID",GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -70,6 +70,7 @@ namespace IEF_Toolbox.Profile
                 return;
             }
             RhinoObject[] currentCrvs = RhinoDocument.Objects.FindByLayer(profileBaseLayers);
+            List<RhinoObject> objs = new List<RhinoObject>();
             foreach (RhinoObject crv in currentCrvs)
             {
                 GeometryBase gb = crv.Geometry;
@@ -77,11 +78,42 @@ namespace IEF_Toolbox.Profile
                 if (crv.Attributes.Name == iProfileID && c != null)
                 {
                     ProfileCurves.Add(c);
+                    objs.Add(crv);
                 }
             }
 
+            if (ProfileCurves.Count == 0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Profile Curve not found. Please check if the profile exists in the Profile Curve layer or if the ID input is correct");
+                return;
+            }
+
+
             //Construct the profile Object
-            FrameProfile profile = new FrameProfile(iProfileID, ref ProfileCurves);
+            FrameProfile profile = new FrameProfile();
+            Point3d orig = Point3d.Origin;
+            Vector3d planeX = new Vector3d(0.0, 0.0, -1.0);
+            Vector3d planeY = new Vector3d(0.0, 1.0, 0.0);
+            Plane defPlane = new Plane(orig, planeX, planeY);
+            RhinoObject obj = objs[0];
+
+            profile.ProfileID = iProfileID;
+            profile.ProfileCrv = ProfileCurves;
+            profile.ProfileDescription = obj.Attributes.GetUserString("Profile Description");
+            profile.ProfileType = obj.Attributes.GetUserString("Profile Type");
+            profile.Material = obj.Attributes.GetUserString("Material");
+            profile.Finish = obj.Attributes.GetUserString("Finish");
+            profile.Anchor = orig;
+            profile.BasePlane = defPlane;
+            profile.ResetProfileType();
+            profile.SortInsideOutside();
+            profile.CalcArea();
+            profile.CalcTopBottomPlane();
+
+            int ver;
+            int.TryParse(obj.Attributes.GetUserString("Bake Version"),out ver);
+            profile.VersionNumber = ver;
+            profile.uniqueID = obj.Attributes.GetUserString("Unique ID");
 
             DA.SetData(0, profile);
         }

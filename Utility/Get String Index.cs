@@ -4,22 +4,22 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace IEF_Toolbox
+namespace IEF_Toolbox.Utility
 {
-    public class Boolean_Difference : GH_Component
+    public class Get_String_Index : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the Boolean_Difference class.
+        /// Initializes a new instance of the Get_String_Index class.
         /// </summary>
-        public Boolean_Difference()
-          : base("Boolean Difference", "BD",
-              "Slightly faster Boolean Difference operation than the built-in Solid Difference component",
+        public Get_String_Index()
+          : base("Get String Indexes", "Index",
+              "Returns all indexes of the item from the input list",
               "IEF Toolbox", "01_Utility")
         {
         }
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.senary; }
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -27,19 +27,17 @@ namespace IEF_Toolbox
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBrepParameter("Base Geometry", "B", "List of base geometries", GH_ParamAccess.list);
-            pManager.AddBrepParameter("Remove Geometry", "R", "List of remove geometries", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Tolerance", "t", "Tolerance of the boolean operation. The default value is set" +
-                " to the RhinoDoc.ModelAbsoluteTolerance", GH_ParamAccess.item);
-            pManager[2].Optional = true;
+            pManager.AddTextParameter("List", "L", "List to search",GH_ParamAccess.list);
+            pManager.AddTextParameter("Item", "I", "Item to search", GH_ParamAccess.item);
+
         }
 
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
-        {
-            pManager.AddBrepParameter("Result", "R", "The result geometry of the boolean difference operation", GH_ParamAccess.list);
+        { 
+            pManager.AddIntegerParameter("Index", "i", "All indexes of the item", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -48,20 +46,24 @@ namespace IEF_Toolbox
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<Brep> baseG = new List<Brep>();
-            List<Brep> removeG = new List<Brep>();
-            double tol = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance;
+            List<string> list = new List<string>();
+            string item = null;
 
+            bool success1 = DA.GetDataList(0, list);
+            bool success2 = DA.GetData(1, ref item);
 
-            bool success1 = DA.GetDataList(0, baseG);
-            bool success2 = DA.GetDataList(1, removeG);
-            bool success3 = DA.GetData(2, ref tol);
+            if (!success1 || !success2) { return; }
 
-            if (!success1) { return; }
+            List<int> ind = new List<int>();
 
-            Brep[] result = Brep.CreateBooleanDifference(baseG, removeG, tol);
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == item)
+                { ind.Add(i); }
+                else { continue; }
+            }
 
-            DA.SetDataList(0, result);
+            DA.SetDataList(0, ind);
         }
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace IEF_Toolbox
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("20195927-24cd-4523-9e7c-1c9a8cc69784"); }
+            get { return new Guid("eabfcb7a-eb26-49ce-807b-9a40f5bb29d0"); }
         }
     }
 }

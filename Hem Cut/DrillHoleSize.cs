@@ -54,10 +54,10 @@ namespace IEF_Toolbox
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddNumberParameter("HoleDiameter", "HoleDiameter", "Output the proper hole size", GH_ParamAccess.item);
-            pManager.AddTextParameter("DrillSize", "DrillSize", "Size of drillbit used on the machine", GH_ParamAccess.item);
-            pManager.AddNumberParameter("ScrewMinorDiameter", "ScrewMinorDiameter","The minimum diameter on the fastener", GH_ParamAccess.item);
-            pManager.AddGenericParameter("DrillObject", "D", "Drill Object. Use Drill Deconstructor to get fields", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Hole Diameter", "HoleDiameter", "Output the proper hole size", GH_ParamAccess.item);
+            pManager.AddTextParameter("Drill Size", "DrillSize", "Size of drillbit used on the machine", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Screw Minor Diameter", "ScrewMinorDiameter","The minimum diameter on the fastener", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Drill Object", "D", "Drill Object. Use Drill Deconstructor to get fields", GH_ParamAccess.item);
         }
 
 
@@ -300,7 +300,7 @@ namespace IEF_Toolbox
             DA.SetData(0, HoleDiameterOutput);
             DA.SetData(1, DrillSizeOutput);
             DA.SetData(2, MinorDiameterOutput);
-            DA.SetData(4, drillHole);
+            DA.SetData(3, drillHole);
         }
 
 

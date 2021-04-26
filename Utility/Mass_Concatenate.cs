@@ -29,7 +29,7 @@ namespace IEF_Toolbox
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Items", "I", "List of items for concatenation", GH_ParamAccess.list);
-            pManager.AddTextParameter("Separator", "s", "Specified item separator. Default value is ';'", GH_ParamAccess.item);
+            pManager.AddTextParameter("Separator", "s", "Specified item separator", GH_ParamAccess.item);
             pManager[1].Optional = true;
         }
 
@@ -48,7 +48,7 @@ namespace IEF_Toolbox
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             List<string> items = new List<string>();
-            string sep = ";";
+            string sep = "";
 
             bool success1  = DA.GetDataList(0, items);
             bool success2 = DA.GetData(1, ref sep);
