@@ -33,11 +33,11 @@ namespace IEF_Toolbox.Utility
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBrepParameter("partNumber", "pN", "List of parts to run the copy", GH_ParamAccess.item);
-            pManager.AddBrepParameter("fileExtension", "ext", "file extension", GH_ParamAccess.item);
-            pManager.AddBrepParameter("sourcePath", "sP", "source path", GH_ParamAccess.item);
-            pManager.AddBrepParameter("targetPath", "tP", "target path", GH_ParamAccess.item);
-            pManager.AddBrepParameter("run", "run", "Turn to True to activate the copy", GH_ParamAccess.item);
+            pManager.AddTextParameter("partNumber", "pN", "List of parts to run the copy", GH_ParamAccess.item);
+            pManager.AddTextParameter("fileExtension", "ext", "file extension", GH_ParamAccess.item);
+            pManager.AddTextParameter("sourcePath", "sP", "source path", GH_ParamAccess.item);
+            pManager.AddTextParameter("targetPath", "tP", "target path", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("run", "run", "Turn to True to activate the copy", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace IEF_Toolbox.Utility
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddBrepParameter("outputMessage", "message", "message", GH_ParamAccess.item);
+            pManager.AddTextParameter("Message", "S", "Status message", GH_ParamAccess.item);
         }
 
 

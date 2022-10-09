@@ -14,10 +14,11 @@ using PdfSharp.Pdf.IO;
 
 namespace IEF_Toolbox.Utility
 {
-    class MergePDF_by_part : GH_Component
-    {        /// <summary>
-             /// Initializes a new instance of the Boolean_Difference_Slow class.
-             /// </summary>
+    public class MergePDF_by_part : GH_Component
+    { 
+        /// <summary>
+        /// Initializes a new instance of the Boolean_Difference_Slow class.
+        /// </summary>
         public MergePDF_by_part()
           : base("MergePDF by Part", "MergePDF by Part",
               "Look for the individual PDFs in the given directories, combine the PDF sheets, and export a single PDF per Part to the taget directory",
@@ -32,15 +33,15 @@ namespace IEF_Toolbox.Utility
 
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBrepParameter("partNumber", "pN", "List of parts to run the copy", GH_ParamAccess.item);
-            pManager.AddBrepParameter("sourceFolderPath", "sP", "source path", GH_ParamAccess.list);
-            pManager.AddBrepParameter("targetFolderPath", "tP", "target path", GH_ParamAccess.item);
-            pManager.AddBrepParameter("run", "run", "Turn to True to activate the copy", GH_ParamAccess.item);
+            pManager.AddTextParameter("partNumber", "pN", "List of parts to run the copy", GH_ParamAccess.item);
+            pManager.AddTextParameter("sourceFolderPath", "sP", "source path", GH_ParamAccess.list);
+            pManager.AddTextParameter("targetFolderPath", "tP", "target path", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("run", "run", "Turn to True to activate the copy", GH_ParamAccess.item);
         }
 
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddBrepParameter("outputMessage", "message", "message", GH_ParamAccess.item);
+            pManager.AddTextParameter("Message", "S", "Status message", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -60,18 +61,18 @@ namespace IEF_Toolbox.Utility
             bool success2 = DA.GetData<string>(2, ref targetFolderDir);
             bool success3 = DA.GetData<bool>(3, ref run);
 
-            // check if the pN pdf exist in the folder directory
+            if (success0 & success1 & success2 & success3)
+            {
+                // get file path from inputs
+                List<string> sourceDir = new List<string>();
+                foreach (string dir in sourceFolderDir) { sourceDir.Add(dir + "\\" + pN + ".pdf"); }
+                string targetDir = targetFolderDir + "\\" + pN + ".pdf";
 
+                // run the merge
+                if (run) { MergePDFs(targetDir, sourceDir); }
 
-            // get file path from inputs
-            List<string> sourceDir = new List<string>();
-            foreach(string dir in sourceFolderDir) { sourceDir.Add(dir + "\\" + pN + ".pdf"); }
-            string targetDir = targetFolderDir + "\\" + pN + ".pdf";
-
-            // run the merge
-            if (run) { MergePDFs(targetDir, sourceDir); }
-
-            DA.SetData(0, outputMessage);
+                DA.SetData(0, outputMessage);
+            }
         }
 
         private static void MergePDFs(string targetPath, List<string> pdfs)
