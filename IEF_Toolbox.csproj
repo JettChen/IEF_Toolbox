@@ -95,6 +95,7 @@
     <Compile Include="Class\FrameProfile.cs" />
     <Compile Include="Class\VerticalReceiver.cs" />
     <Compile Include="Utility\Boolean_Difference_Slow.cs" />
+    <Compile Include="Utility\MergePDFfromPath.cs" />
     <Compile Include="Utility\Copy_File_From_To.cs" />
     <Compile Include="Utility\Cull_First_Last.cs" />
     <Compile Include="Profile\Reorient Profile.cs" />
@@ -119,7 +120,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Hem Cut\AccessDrillSizeChart.cs" />
-    <Compile Include="Utility\MergePDF.cs" />
+    <Compile Include="Utility\MergePDFbyPart.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -15,9 +15,9 @@ using PdfSharp.Pdf.IO;
 namespace IEF_Toolbox.Utility
 {
     public class MergePDF_by_part : GH_Component
-    { 
+    {
         /// <summary>
-        /// Initializes a new instance of the Boolean_Difference_Slow class.
+        /// Initializes a new instance of the MergePDF by Part class.
         /// </summary>
         public MergePDF_by_part()
           : base("MergePDF by Part", "MergePDF by Part",
@@ -69,13 +69,15 @@ namespace IEF_Toolbox.Utility
                 string targetDir = targetFolderDir + "\\" + pN + ".pdf";
 
                 // run the merge
-                if (run) { MergePDFs(targetDir, sourceDir); }
+                if (run) { MergePDFs(targetDir, sourceDir);
+                    outputMessage = pN + " PDF successfully merged";
+                }
 
                 DA.SetData(0, outputMessage);
             }
         }
 
-        private static void MergePDFs(string targetPath, List<string> pdfs)
+        public static void MergePDFs(string targetPath, List<string> pdfs)
         {
             using (var targetDoc = new PdfDocument())
             {
