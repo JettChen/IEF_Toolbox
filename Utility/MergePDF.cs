@@ -43,7 +43,10 @@ namespace IEF_Toolbox.Utility
             pManager.AddBrepParameter("outputMessage", "message", "message", GH_ParamAccess.item);
         }
 
-
+        /// <summary>
+        /// This is the method that actually does the work.
+        /// </summary>
+        /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             string pN = null;
@@ -101,7 +104,7 @@ namespace IEF_Toolbox.Utility
 
         public override Guid ComponentGuid
         {
-            get { return new Guid("4B1D24B0 - 7EBC - 4F04 - 9B12 - DB48A3AE3823"); }
+            get { return new Guid("9A40E630-2B0F-4D6D-B904-3B4796F1967D"); }
         }
 
     }
